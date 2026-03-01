@@ -35,17 +35,17 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
-                  name: 'Sophie M.',
+                  name: 'Lina',
                   rating: 5,
                   text: 'Excellent qualité ! Le pyjama est très confortable et la livraison était rapide. Je recommande vivement !'
                 },
                 {
-                  name: 'Jean D.',
+                  name: 'Salma',
                   rating: 5,
                   text: 'Les meilleurs pyjamas que j\'ai jamais achetés. La qualité du tissu est exceptionnelle.'
                 },
                 {
-                  name: 'Marie L.',
+                  name: 'Inès',
                   rating: 5,
                   text: 'Service client impeccable et produit conforme aux photos. Merci Pijama !'
                 }
