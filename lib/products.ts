@@ -24,8 +24,8 @@ export const products: Product[] = [
   {
     id: '1',
     name: 'Ensemble Pyjama',
-    price: 290,
-    salePrice: 350,
+    price: 350,
+    salePrice: 290,
     image: 'summer-light',
     collection: 'été',
     colors: ['Rose', 'beige'],
