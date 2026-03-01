@@ -83,10 +83,10 @@ export function ProductCarouselSection() {
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl font-serif font-bold text-gray-900 mb-3 text-balance">
-            Featured Products
+            Nos produits
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our most popular pajamas selected by our customers
+            Découvrez nos pyjamas les plus populaires sélectionnés par nos clients
           </p>
         </div>
 
