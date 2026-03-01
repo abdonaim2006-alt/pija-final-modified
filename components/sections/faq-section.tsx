@@ -5,40 +5,34 @@ import { ChevronDown } from 'lucide-react'
 
 const faqs = [
   {
-    id: 1,
-    question: 'Comment dois-je entretenir mes pyjamas?',
-    answer:
-      'Nous recommandons de laver à l\'eau tiède avec un détergent neutre. Évitez l\'assouplissant et séchez à basse température ou à l\'air libre pour préserver la qualité du tissu.',
+    "id": 1,
+    "question": "Comment dois-je entretenir mes pyjamas?",
+    "answer": "Nous recommandons de laver à l'eau tiède avec un détergent neutre. Évitez l'assouplissant et séchez à basse température ou à l'air libre pour préserver la qualité du tissu."
   },
   {
-    id: 2,
-    question: 'Quel est le délai de livraison?',
-    answer:
-      'Nous livrons partout en France en 7 à 15 jours ouvrables. Vous recevrez un code de suivi dès que votre commande sera expédiée.',
+    "id": 2,
+    "question": "Quel est le délai de livraison au Maroc?",
+    "answer": "Nous livrons partout au Maroc en 2 à 5 jours ouvrables. Vous recevrez une confirmation de commande avec les détails de livraison."
   },
   {
-    id: 3,
-    question: 'Offrez-vous des échanges ou des retours?',
-    answer:
-      'Oui! Nous acceptons les échanges et retours jusqu\'à 30 jours après l\'achat. Le produit doit être en parfait état avec l\'emballage d\'origine.',
+    "id": 3,
+    "question": "Offrez-vous des échanges ou des retours?",
+    "answer": "Oui. Nous acceptons les échanges et retours jusqu'à 7 jours après la réception. Le produit doit être en parfait état avec l'emballage d'origine."
   },
   {
-    id: 4,
-    question: 'Quelle taille dois-je choisir?',
-    answer:
-      'Nous avons un guide des tailles détaillé pour chaque produit. Généralement, nous recommandons de choisir la même taille que celle que vous portez habituellement.',
+    "id": 4,
+    "question": "Quelle taille dois-je choisir?",
+    "answer": "Un guide des tailles est disponible pour chaque produit. Il est recommandé de choisir votre taille habituelle."
   },
   {
-    id: 5,
-    question: 'Les pyjamas rétrécissent-ils au lavage?',
-    answer:
-      'Nos pyjamas sont traités pour résister au rétrécissement. En suivant les instructions d\'entretien, le rétrécissement est minime (moins de 5%).',
+    "id": 5,
+    "question": "Les pyjamas rétrécissent-ils au lavage?",
+    "answer": "Les tissus sont traités pour limiter le rétrécissement. En respectant les instructions d’entretien, la variation reste minimale (moins de 5%)."
   },
   {
-    id: 6,
-    question: 'Offrez-vous des codes de réduction?',
-    answer:
-      'Oui! Inscrivez-vous à notre newsletter pour recevoir des codes exclusifs et des offres spéciales. Vous pouvez également profiter de promotions saisonnières.',
+    "id": 6,
+    "question": "Proposez-vous le paiement à la livraison (COD) au Maroc?",
+    "answer": "Oui, le paiement à la livraison est disponible partout au Maroc. Vous pouvez régler votre commande en espèces au moment de la réception."
   },
 ]
 
