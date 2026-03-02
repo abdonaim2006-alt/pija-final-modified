@@ -128,19 +128,19 @@ export function SingleProductOrderForm({
       <div className="space-y-3">
         <div>
           <label className="text-sm font-medium">Nom complet *</label>
-          <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="ANAS ZAKI" />
+          <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Nom complet" />
         </div>
         <div>
           <label className="text-sm font-medium">Téléphone *</label>
-          <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+33 6 12 34 56 78" />
+          <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Téléphone" />
         </div>
         <div>
           <label className="text-sm font-medium">Ville *</label>
-          <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="CASABLANCA" />
+          <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Ville" />
         </div>
         <div>
           <label className="text-sm font-medium">Adresse *</label>
-          <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="AINCHOCK BOULEVARD QODS 20470" />
+          <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Adresse " />
         </div>
       </div>
 
