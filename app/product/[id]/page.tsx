@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/context/cart-context'
 import { useParams } from 'next/navigation'
-import { ChevronLeft, Star, X } from 'lucide-react'
+import { ChevronLeft, Star } from 'lucide-react'
 import { SingleProductOrderForm } from '@/components/single-product-order-form'
 import { products } from '@/lib/products'
 
@@ -24,8 +24,6 @@ function ProductContent() {
   const [addedToCart, setAddedToCart] = useState(false)
   const [showOrderForm, setShowOrderForm] = useState(false)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
-  const [showDetailModal, setShowDetailModal] = useState(false)
-  const [modalImage, setModalImage] = useState('')
 
   // Map colors to image suffixes
   const colorImageMap: { [key: string]: string } = {
@@ -114,15 +112,13 @@ function ProductContent() {
   const galleryImages = getGalleryImages()
 
   const handleThumbnailClick = (index: number) => {
-    setActiveImageIndex(index)
-    const image = galleryImages[index]
-    if (image.type === 'color' && image.color) {
-      setSelectedColor(image.color)
-    } else if (image.type === 'detail') {
-      setShowDetailModal(true)
-      setModalImage(image.src)
-    }
+  setActiveImageIndex(index)
+  const image = galleryImages[index]
+  if (image.type === 'color' && image.color) {
+    setSelectedColor(image.color)
   }
+  // Les details s'affichent simplement dans l'image principale
+}
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color)
@@ -133,30 +129,9 @@ function ProductContent() {
     }
   }
 
-  return (
-    <main className="flex-1">
-      {/* Detail Image Modal */}
-      {showDetailModal && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-          onClick={() => setShowDetailModal(false)}
-        >
-          <button
-            onClick={() => setShowDetailModal(false)}
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-          >
-            <X className="w-8 h-8" />
-          </button>
-          <img
-            src={modalImage}
-            alt="Détail du produit"
-            className="max-w-full max-h-[90vh] object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+return (
+  <main className="flex-1">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/collections" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6">
           <ChevronLeft className="w-4 h-4" />
           Retour aux produits
