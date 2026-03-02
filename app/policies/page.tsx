@@ -113,8 +113,8 @@ export default function PoliciesPage() {
               <p className="text-lg text-muted-foreground mb-4">
                 Des questions concernant nos politiques?
               </p>
-              <a href="mailto:contact@pijama.com" className="text-primary hover:opacity-80 transition-opacity font-semibold">
-                contact@pijama.com
+              <a href="mailto:lilynova.ma@gmail.com" className="text-primary hover:opacity-80 transition-opacity font-semibold">
+                lilynova.ma@gmail.com
               </a>
             </div>
           </div>
