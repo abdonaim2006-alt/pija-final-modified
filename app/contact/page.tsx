@@ -50,8 +50,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">WhatsApp</h3>
-                    <a href="https://wa.me/33652768993" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                      +33 6 52 76 89 93
+                    <a href="https://wa.me/212660435756" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      +2126 60 43 57 56
                     </a>
                   </div>
                 </div>
