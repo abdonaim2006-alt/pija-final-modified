@@ -63,7 +63,7 @@ export function Footer() {
                 contact@pijama.com
               </a>
               <a
-                href="https://wa.me/33652768993"
+                href="https://wa.me/212660435756"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
