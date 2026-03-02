@@ -242,7 +242,7 @@ export default function CollectionPage() {
                   Des questions? Contactez-nous
                 </h2>
                 <a
-                  href="https://wa.me/212621650071?text=Bonjour, j'aimerais plus d'infos sur cette collection de pyjamas!"
+                  href="https://wa.me/212660435756?text=Bonjour, j'aimerais plus d'infos sur cette collection de pyjamas!"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
