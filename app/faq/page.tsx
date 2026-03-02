@@ -85,7 +85,7 @@ export default function FAQPage() {
               <p className="text-lg text-muted-foreground mb-4">
                 Vous n\'avez pas trouvé la réponse que vous cherchez?
               </p>
-              <a href="https://wa.me/33652768993" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 transition-opacity font-semibold">
+              <a href="https://wa.me/212660435756" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 transition-opacity font-semibold">
                 Contactez-nous sur WhatsApp →
               </a>
             </div>
