@@ -133,7 +133,7 @@ export default function ProductsPage() {
               Contactez-nous sur WhatsApp pour des recommandations personnalisées
             </p>
             <a
-              href="https://wa.me/33652768993?text=Bonjour, j'aimerais des conseils sur vos pyjamas Pijama!"
+              href="https://wa.me/212621650071?text=Bonjour, j'aimerais des conseils sur vos pyjamas Pijama!"
               target="_blank"
               rel="noopener noreferrer"
             >
