@@ -56,11 +56,11 @@ export function Footer() {
             <h4 className="font-semibold">Contact</h4>
             <div className="flex flex-col gap-2 text-sm">
               <a
-                href="mailto:contact@pijama.com"
+                href="mailto:lilynova.ma@gmail.com"
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
                 <Mail className="w-4 h-4" />
-                contact@pijama.com
+                lilynova.ma@gmail.com
               </a>
               <a
                 href="https://wa.me/212660435756"
