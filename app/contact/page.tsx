@@ -38,8 +38,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                    <a href="mailto:contact@pijama.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      contact@pijama.com
+                    <a href="mailto:lilynova.ma@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      lilynova.ma@gmail.com
                     </a>
                   </div>
                 </div>
@@ -63,7 +63,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Adresse</h3>
                     <p className="text-muted-foreground">
-                      Paris, France
+                      Maroc,Casablanca
                     </p>
                   </div>
                 </div>
