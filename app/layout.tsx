@@ -52,13 +52,13 @@ export const metadata: Metadata = {
   description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
   images: [
     {
-      url: '/images/hero-bg.jpg',
+      url: '/hero-bg-desktop.jpg',
       width: 1200,
       height: 630,
       alt: 'Pijama Pyjamas Premium - Desktop',
     },
     {
-      url: '/images/product-4-vert.jpg',
+      url: '/images/hero-bg-mobile.jpg',
       width: 1080,
       height: 1920,
       alt: 'Pijama Pyjamas Premium - Mobile',
