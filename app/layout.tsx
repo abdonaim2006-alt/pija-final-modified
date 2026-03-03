@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       alt: 'Pijama Pyjamas Premium - Desktop',
     },
     {
-      url: '/images/hero-bg.jpg',
+      url: '/images/product-4-vert.jpg',
       width: 1080,
       height: 1920,
       alt: 'Pijama Pyjamas Premium - Mobile',
