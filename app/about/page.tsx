@@ -15,10 +15,10 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto text-center">
             <div className="animate-in fade-in duration-1000">
               <h1 className="text-5xl sm:text-6xl font-serif font-bold mb-4">
-                À Propos de Pijama
+                À Propos de Lilynova
               </h1>
               <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                Découvrez notre histoire et notre mission de créer les pyjamas les plus confortables du monde
+                Vêtements de nuit et homewear alliant confort supérieur, qualité maîtrisée et esthétique raffinée
               </p>
             </div>
           </div>
@@ -30,20 +30,20 @@ export default function AboutPage() {
             <div className="space-y-4 animate-in fade-in duration-1000">
               <h2 className="text-3xl font-serif font-bold text-foreground">Notre Histoire</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Pijama a été fondée avec une simple mission : créer les pyjamas les plus confortables et de la plus haute qualité. Notre équipe est passionnée par l'excellence et l'innovation dans le domaine du confort nocturne.
+                Lilynova est née d’une ambition précise : créer des vêtements de nuit et homewear qui allient confort supérieur, qualité maîtrisée et esthétique raffinée.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Depuis nos débuts, nous avons travaillé sans relâche pour sélectionner les meilleures matières premières et développer des designs qui allient style et confort absolu.
+                La marque développe des collections pensées pour le quotidien, en sélectionnant des matières reconnues pour leur douceur, leur résistance et leur tenue dans le temps. Chaque pièce est conçue avec une attention particulière aux détails, aux coupes et aux finitions.
               </p>
             </div>
 
             <div className="space-y-4 animate-in fade-in duration-1000">
               <h2 className="text-3xl font-serif font-bold text-foreground">Notre Mission</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Nous croyons que tout le monde mérite une bonne nuit de sommeil. C'est pourquoi nous nous engageons à fournir des pyjamas de qualité premium qui promettent confort, durabilité et style.
+                Proposer des produits fiables, élégants et confortables, conçus pour améliorer l’expérience du repos et du bien-être à domicile.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Nos valeurs : qualité sans compromis, satisfaction client garantie, et engagement envers la durabilité.
+                Lilynova vise un équilibre constant entre innovation textile, design moderne et durabilité, afin d’offrir une valeur réelle et mesurable à ses clients.
               </p>
             </div>
 
@@ -52,26 +52,34 @@ export default function AboutPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>
-                  <span className="text-lg text-muted-foreground"><strong>Qualité :</strong> Nous utilisons uniquement les meilleures matières premières</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong>Qualité Contrôlée :</strong> Sélection rigoureuse des tissus et standards élevés de fabrication.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>
-                  <span className="text-lg text-muted-foreground"><strong>Confort :</strong> Chaque pyjama est conçu pour le confort maximal</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong>Confort Absolu :</strong> Conception axée sur la liberté de mouvement et la douceur.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>
-                  <span className="text-lg text-muted-foreground"><strong>Style :</strong> Nos designs sont élégants et intemporels</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong>Élégance Durable :</strong> Designs sobres, intemporels et adaptables.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>
-                  <span className="text-lg text-muted-foreground"><strong>Durabilité :</strong> Nous nous soucions de l'environnement</span>
+                  <span className="text-lg text-muted-foreground">
+                    <strong>Responsabilité :</strong> Démarche attentive à l’impact environnemental.
+                  </span>
                 </li>
               </ul>
             </div>
 
             <div className="text-center pt-8 animate-in fade-in duration-1000">
               <p className="text-lg text-muted-foreground mb-6">
-                Vous avez des questions? Contactez-nous
+                Vous avez des questions ? Contactez-nous
               </p>
               <Link href="/contact">
                 <Button className="h-12">Nous Contacter</Button>
