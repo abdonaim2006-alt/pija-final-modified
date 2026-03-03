@@ -64,7 +64,6 @@ export const metadata: Metadata = {
       alt: 'Pijama Pyjamas Premium - Mobile',
     }
   ],
-},
   },
   twitter: {
     card: 'summary_large_image',
