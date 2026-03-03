@@ -45,17 +45,26 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    type: 'website',
-    locale: 'fr_FR',
-    url: 'https://pijama.com',
-    title: 'Pijama - Pyjamas Premium Confortables',
-    description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
-    images: [{
+  type: 'website',
+  locale: 'fr_FR',
+  url: 'https://pijama.com',
+  title: 'Pijama - Pyjamas Premium Confortables',
+  description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
+  images: [
+    {
       url: '/images/hero-bg.jpg',
       width: 1200,
       height: 630,
-      alt: 'Pijama Pyjamas Premium',
-    }],
+      alt: 'Pijama Pyjamas Premium - Desktop',
+    },
+    {
+      url: '/images/hero-bg.jpg',
+      width: 1080,
+      height: 1920,
+      alt: 'Pijama Pyjamas Premium - Mobile',
+    }
+  ],
+},
   },
   twitter: {
     card: 'summary_large_image',
