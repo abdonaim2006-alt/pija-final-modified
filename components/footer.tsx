@@ -108,7 +108,7 @@ export function Footer() {
 
         <div className="border-t border-secondary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <p>&copy; 2024 Pijama. Tous les droits reserves.</p>
+            <p>&copy; 2024 lilynova. Tous les droits reserves.</p>
             <div className="flex gap-6">
               <Link href="/policies" className="hover:opacity-80 transition-opacity">
                 Confidentialite
