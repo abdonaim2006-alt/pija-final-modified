@@ -23,7 +23,7 @@ export const products: Product[] = [
   // Collection Été - 2 produits
   {
     id: '1',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Arc-en-ciel',
     price: 350,
     salePrice: 290,
     image: 'summer-light',
@@ -43,7 +43,7 @@ export const products: Product[] = [
   },
   {
     id: '2',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Cœur Élégant',
     price: 290,
     image: 'linen-breeze',
     collection: 'été',
@@ -63,7 +63,7 @@ export const products: Product[] = [
   // Collection Hiver - 2 produits
   {
     id: '3',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Mini Moon',
     price: 300,
     image: 'winter-cozy',
     collection: 'hiver',
@@ -81,7 +81,7 @@ export const products: Product[] = [
   },
   {
     id: '4',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Motif Tressé',
     price: 270,
     image: 'cashmere-winter',
     collection: 'hiver',
@@ -101,7 +101,7 @@ export const products: Product[] = [
   // Collection Premium - 2 produits
   {
     id: '5',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Chic Rayé',
     price: 280,
     image: 'silk-luxury',
     collection: 'premium',
@@ -120,7 +120,7 @@ export const products: Product[] = [
   },
   {
     id: '6',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Petit Ourson',
     price: 290,
     image: 'cotton-premium',
     collection: 'premium',
@@ -141,7 +141,7 @@ export const products: Product[] = [
   // Collection Confort - 2 produits
   {
     id: '7',
-    name: 'Ensemble Pyjama',
+    name: 'Ensemble Signature Douceur',
     price: 290,
     image: 'bamboo-eco',
     collection: 'confort',
