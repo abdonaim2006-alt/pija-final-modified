@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-serif font-bold">Pijama</h3>
+            <h3 className="text-xl font-serif font-bold">lilynova</h3>
             <p className="text-sm opacity-80">
               Confort premium pour votre repos.
             </p>
