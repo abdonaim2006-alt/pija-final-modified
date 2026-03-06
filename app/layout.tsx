@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'lilynova - Pyjamas Premium Confortables | Livraison Gratuite Maroc',
+  title: 'Pyjamas Premium Confortables | Livraison Gratuite Maroc',
   description: 'Découvrez nos pyjamas luxueux et confortables de haute qualité. Livraison gratuite au Maroc. Paiement à la livraison. Commandez maintenant pour un confort premium.',
   keywords: 'pyjamas, pyjama été, pyjama luxe, confort, sommeil, Maroc, livraison gratuite',
   generator: 'v0.app',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   type: 'website',
   locale: 'fr_FR',
   url: 'https://lilynova.com',
-  title: 'lilynova - Pyjamas Premium Confortables',
+  title: 'Pyjamas Premium Confortables',
   description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
   images: [
     {
