@@ -29,7 +29,7 @@ export function HeroSection() {
         <div className="space-y-8 animate-in fade-in duration-1000">
           <div className="space-y-4">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-tight">
-              Pijama – Pyjamas Premium Confortables
+              lilynova – Pyjamas Premium Confortables
             </h1>
             <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto">
               Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc
