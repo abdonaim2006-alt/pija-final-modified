@@ -12,7 +12,6 @@ export function MetaPixel() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Create and inject the Meta Pixel script immediately
     const metaPixelCode = document.createElement('script')
     metaPixelCode.innerHTML = `
       !function(f,b,e,v,n,t,s)
@@ -28,7 +27,6 @@ export function MetaPixel() {
     `
     document.head.insertBefore(metaPixelCode, document.head.firstChild)
 
-    // Add noscript fallback
     const noscript = document.createElement('noscript')
     const img = document.createElement('img')
     img.height = 1
