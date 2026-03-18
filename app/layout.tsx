@@ -3,8 +3,8 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/context/cart-context'
 import { WhatsAppButton } from '@/components/whatsapp-button'
-import './globals.css'
 import { PixelWrapper } from '@/components/pixel-wrapper'
+import './globals.css'
 
 const inter = Inter({ 
   subsets: ["latin"],

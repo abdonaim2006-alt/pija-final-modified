@@ -71,13 +71,16 @@ export function PajamaOrderForm({ items, total }: PajamaOrderFormProps) {
       if (!response.ok) {
         throw new Error(data.error || 'Erreur lors de l\'envoi')
       }
-trackPurchase({
-  currency: 'MAD',
-  value: total,                                    // Montant total
-  content_name: items.map(item => item.name),    // Noms des produits
-  content_ids: items.map((_, idx) => idx.toString()),  // IDs
-  num_items: items.length,                         // Nombre d'articles
-})
+
+      // Track Purchase event for Meta Pixel
+      trackPurchase({
+        currency: 'MAD',
+        value: total,
+        content_name: items.map(item => item.name).join(', '),
+        content_ids: items.map((_, idx) => idx.toString()),
+        num_items: items.reduce((sum, item) => sum + item.quantity, 0),
+      })
+
       setSuccess(true)
       setFullName('')
       setPhone('')

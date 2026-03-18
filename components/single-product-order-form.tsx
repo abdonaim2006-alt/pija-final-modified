@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CheckCircle, AlertCircle } from 'lucide-react'
+import { trackPurchase } from '@/components/meta-pixel'
 
 interface SingleProductOrderFormProps {
   selectedModel: string
@@ -74,6 +75,15 @@ export function SingleProductOrderForm({
       if (!response.ok) {
         throw new Error(data.error || 'Erreur lors de l\'envoi')
       }
+
+      // Track Purchase event for Meta Pixel
+      trackPurchase({
+        value: total,
+        currency: 'MAD',
+        content_name: selectedModel,
+        content_ids: [selectedModel],
+        num_items: quantity,
+      })
 
       setSuccess(true)
       setFullName('')
