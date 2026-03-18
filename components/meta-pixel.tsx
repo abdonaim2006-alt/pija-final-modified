@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
 
 declare global {
   interface Window {
@@ -10,41 +9,25 @@ declare global {
 }
 
 export function MetaPixel() {
-  const pathname = usePathname()
-
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    if ((window as any).fbq?.loaded) return
-
-    // Initialize fbq stub
-    window.fbq = function (...args: any[]) {
-      if (window.fbq.callMethod) {
-        window.fbq.callMethod.apply(window.fbq, args)
-      } else {
-        window.fbq.queue.push(args)
-      }
-    }
-    window.fbq.queue = []
-    window.fbq.loaded = true
-    window.fbq.version = '2.0'
-
-    // Call init and track
-    window.fbq('init', '797473043399003')
-    window.fbq('track', 'PageView')
-
-    // Load script
+    // Add Meta Pixel script to head
     const script = document.createElement('script')
-    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+    script.innerHTML = `
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '797473043399003');
+      fbq('track', 'PageView');
+    `
     script.async = true
     script.defer = true
     document.head.appendChild(script)
   }, [])
-
-  useEffect(() => {
-    if (window?.fbq) {
-      window.fbq('track', 'PageView')
-    }
-  }, [pathname])
 
   return null
 }
@@ -56,8 +39,8 @@ export function trackPurchase(data: {
   content_ids?: string[]
   num_items?: number
 }) {
-  if (window?.fbq) {
-    window.fbq('track', 'Purchase', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'Purchase', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -73,8 +56,8 @@ export function trackAddToCart(data: {
   content_name?: string
   content_id?: string
 }) {
-  if (window?.fbq) {
-    window.fbq('track', 'AddToCart', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'AddToCart', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -90,8 +73,8 @@ export function trackViewContent(data: {
   content_id?: string
   content_type?: string
 }) {
-  if (window?.fbq) {
-    window.fbq('track', 'ViewContent', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'ViewContent', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
