@@ -9,39 +9,36 @@ export function MetaPixel() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Only initialize once
-    if ((window as any).fbq) return
+    // Initialize fbq only once
+    if ((window as any).fbq && (window as any).fbq.loaded) return
 
-    // Create the fbq function stub BEFORE loading the script
-    const fbq = function (this: any, ...args: any[]) {
+    // Create the fbq function stub
+    function fbq(...args: any[]) {
       if (fbq.callMethod) {
-        fbq.callMethod.apply(fbq, args)
+        fbq.callMethod.apply(fbq, args as any)
       } else {
         fbq.queue.push(args)
       }
     }
 
-    fbq.push = fbq
+    fbq.queue = []
     fbq.loaded = true
     fbq.version = '2.0'
-    fbq.queue = []
 
-    // Attach to window
+    // Attach to window immediately
     ;(window as any).fbq = fbq
 
-    // Initialize with Meta Pixel ID
-    ;(window as any).fbq('init', '797473043399003')
-    ;(window as any).fbq('track', 'PageView')
+    // Now it's safe to call fbq
+    fbq('init', '797473043399003')
+    fbq('track', 'PageView')
 
-    // Now load the actual Facebook script
-    const script = document.createElement('script')
-    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
-    script.async = true
-    script.defer = true
-    document.head.appendChild(script)
-
-    return () => {
-      // Cleanup on unmount
+    // Load the Facebook script
+    if (!document.querySelector('script[src*="connect.facebook.net"]')) {
+      const script = document.createElement('script')
+      script.async = true
+      script.defer = true
+      script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+      document.head.appendChild(script)
     }
   }, [])
 
