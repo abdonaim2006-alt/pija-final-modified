@@ -7,13 +7,24 @@ import { Button } from '@/components/ui/button'
 import { useCart } from '@/context/cart-context'
 import { Trash2 } from 'lucide-react'
 import { PajamaOrderForm } from '@/components/pajama-order-form'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { trackViewContent } from '@/components/meta-pixel'
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity, total } = useCart()
   const [showOrderForm, setShowOrderForm] = useState(false)
 
-  if (items.length === 0) {
+  // Track cart view event
+  useEffect(() => {
+    if (items.length > 0) {
+      trackViewContent({
+        value: total,
+        currency: 'MAD',
+        content_name: 'Panier',
+        content_type: 'cart',
+      })
+    }
+  }, [items, total])
     return (
       <>
         <Header />
