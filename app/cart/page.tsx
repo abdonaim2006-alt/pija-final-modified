@@ -14,7 +14,6 @@ export default function CartPage() {
   const { items, removeFromCart, updateQuantity, total } = useCart()
   const [showOrderForm, setShowOrderForm] = useState(false)
 
-  // Track cart view event
   useEffect(() => {
     if (items.length > 0) {
       trackViewContent({
@@ -25,6 +24,8 @@ export default function CartPage() {
       })
     }
   }, [items, total])
+
+  if (items.length === 0) {
     return (
       <>
         <Header />
@@ -57,16 +58,13 @@ export default function CartPage() {
             Votre Panier
           </h1>
 
-          {/* Mobile and Desktop Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            {/* Cart Items */}
             <div className="lg:col-span-2 space-y-3 sm:space-y-4">
               {items.map((item, index) => (
                 <div
                   key={`${item.id}-${index}`}
                   className="flex flex-col sm:flex-row gap-3 sm:gap-4 bg-black rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow"
                 >
-                  {/* Product Image */}
                   <div className="w-full sm:w-24 sm:h-24 bg-muted rounded flex items-center justify-center flex-shrink-0 aspect-video sm:aspect-square">
                     <img
                       src={item.image || `/images/product-${item.id.split('-')[0]}.jpg`}
@@ -79,7 +77,6 @@ export default function CartPage() {
                     />
                   </div>
 
-                  {/* Product Info */}
                   <div className="flex-1 min-w-0">
                     <h3 className="font-serif font-semibold text-white text-sm sm:text-base truncate">
                       {item.name}
@@ -92,7 +89,6 @@ export default function CartPage() {
                     </p>
                   </div>
 
-                  {/* Quantity and Remove - Mobile Stack */}
                   <div className="flex items-center justify-between sm:flex-col sm:gap-2">
                     <div className="flex items-center gap-2 sm:gap-1">
                       <button
@@ -101,7 +97,9 @@ export default function CartPage() {
                       >
                         −
                       </button>
-                      <span className="w-5 text-center text-sm text-white">{item.quantity}</span>
+                      <span className="w-5 text-center text-sm text-white">
+                        {item.quantity}
+                      </span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         className="w-7 h-7 sm:w-8 sm:h-8 border border-gray-600 bg-gray-900 rounded flex items-center justify-center hover:bg-gray-800 text-white text-xs sm:text-sm"
@@ -120,7 +118,6 @@ export default function CartPage() {
               ))}
             </div>
 
-            {/* Order Summary - Sticky on Desktop, Fixed on Mobile */}
             <div className="lg:col-span-1">
               <div className="bg-black rounded-lg p-4 sm:p-6 lg:sticky lg:top-20 text-white border border-gray-800">
                 <h2 className="text-lg sm:text-xl font-serif font-bold text-white mb-4">
@@ -129,7 +126,9 @@ export default function CartPage() {
                 <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-700">
                   <div className="flex justify-between text-sm sm:text-base">
                     <span className="text-gray-300">Sous-total</span>
-                    <span className="font-semibold text-white">{total.toFixed(2)} DH</span>
+                    <span className="font-semibold text-white">
+                      {total.toFixed(2)} DH
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm sm:text-base">
                     <span className="text-gray-300">Livraison</span>
@@ -137,7 +136,9 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-base sm:text-lg pt-2">
                     <span className="font-bold text-white">Total</span>
-                    <span className="font-bold text-yellow-400">{total.toFixed(2)} DH</span>
+                    <span className="font-bold text-yellow-400">
+                      {total.toFixed(2)} DH
+                    </span>
                   </div>
                 </div>
 
@@ -146,10 +147,16 @@ export default function CartPage() {
                     onClick={() => setShowOrderForm(!showOrderForm)}
                     className="w-full h-10 sm:h-12 text-sm sm:text-base"
                   >
-                    {showOrderForm ? 'Fermer le formulaire' : 'Acheter Maintenant'}
+                    {showOrderForm
+                      ? 'Fermer le formulaire'
+                      : 'Acheter Maintenant'}
                   </Button>
+
                   <Link href="/collections" className="block">
-                    <Button variant="outline" className="w-full h-10 sm:h-12 text-sm sm:text-base">
+                    <Button
+                      variant="outline"
+                      className="w-full h-10 sm:h-12 text-sm sm:text-base"
+                    >
                       Continuer Vos Achats
                     </Button>
                   </Link>
@@ -158,23 +165,28 @@ export default function CartPage() {
             </div>
           </div>
 
-          {/* Order Form Section */}
           {showOrderForm && items.length > 0 && (
             <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t">
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-foreground mb-6">
                 Commander Maintenant
               </h2>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                {/* Order Summary for Form */}
                 <div className="order-2 lg:order-1">
                   <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4">
                     Résumé des Articles
                   </h3>
+
                   <div className="bg-black rounded-lg p-4 space-y-3 text-white border border-gray-800">
                     {items.map((item, index) => (
-                      <div key={`order-${item.id}-${index}`} className="flex justify-between items-center text-sm sm:text-base">
+                      <div
+                        key={`order-${item.id}-${index}`}
+                        className="flex justify-between items-center text-sm sm:text-base"
+                      >
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium text-white truncate">{item.name}</p>
+                          <p className="font-medium text-white truncate">
+                            {item.name}
+                          </p>
                           <p className="text-xs sm:text-sm text-gray-300">
                             x {item.quantity}
                           </p>
@@ -184,19 +196,18 @@ export default function CartPage() {
                         </span>
                       </div>
                     ))}
+
                     <div className="border-t border-gray-700 pt-3 flex justify-between font-bold text-base sm:text-lg">
                       <span className="text-white">Total</span>
-                      <span className="text-yellow-400">{total.toFixed(2)} DH</span>
+                      <span className="text-yellow-400">
+                        {total.toFixed(2)} DH
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Order Form */}
                 <div className="order-1 lg:order-2">
-                  <PajamaOrderForm
-                    items={items}
-                    total={total}
-                  />
+                  <PajamaOrderForm items={items} total={total} />
                 </div>
               </div>
             </div>
