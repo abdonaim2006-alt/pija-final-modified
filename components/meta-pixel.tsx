@@ -1,33 +1,31 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 declare global {
   interface Window {
-    fbq?: (...args: any[]) => void
-    _fbq?: (...args: any[]) => void
+    fbq?: any
+    _fbq?: any
   }
 }
 
-const PIXEL_ID = '797473043399003'
-
 export function MetaPixel() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
+  // Initialize pixel only once
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    // Only load script once
     if (!window.fbq) {
-      ;(function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+      // Official Facebook Pixel Code
+      ;(function(f: any, b: any, e: any, v: any, n: any, t: any, s: any) {
         if (f.fbq) return
-        n = f.fbq = function (...args: any[]) {
-          if (n.callMethod) {
-            n.callMethod.apply(n, args)
-          } else {
-            n.queue.push(args)
-          }
+        n = f.fbq = function() {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments)
         }
         if (!f._fbq) f._fbq = n
         n.push = n
@@ -39,17 +37,32 @@ export function MetaPixel() {
         t.src = v
         s = b.getElementsByTagName(e)[0]
         s.parentNode.insertBefore(t, s)
-      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js')
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', 'fbq')
 
-      window.fbq('init', PIXEL_ID)
-      window.fbq('track', 'PageView')
+      // Initialize Pixel ID
+      window.fbq('init', '797473043399003')
+
+      // Add noscript fallback
+      if (!document.getElementById('facebook-pixel-noscript')) {
+        const noscript = document.createElement('noscript')
+        noscript.id = 'facebook-pixel-noscript'
+        const img = document.createElement('img')
+        img.height = 1
+        img.width = 1
+        img.style.display = 'none'
+        img.src = 'https://www.facebook.com/tr?id=797473043399003&ev=PageView&noscript=1'
+        noscript.appendChild(img)
+        document.body.appendChild(noscript)
+      }
     }
   }, [])
 
+  // Track PageView on route changes
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.fbq) return
-    window.fbq('track', 'PageView')
-  }, [pathname, searchParams])
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView')
+    }
+  }, [pathname])
 
   return null
 }
@@ -61,8 +74,8 @@ export function trackPurchase(data: {
   content_ids?: string[]
   num_items?: number
 }) {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'Purchase', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'Purchase', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -78,8 +91,8 @@ export function trackAddToCart(data: {
   content_name?: string
   content_id?: string
 }) {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'AddToCart', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'AddToCart', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -95,8 +108,8 @@ export function trackViewContent(data: {
   content_id?: string
   content_type?: string
 }) {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'ViewContent', {
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'ViewContent', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
