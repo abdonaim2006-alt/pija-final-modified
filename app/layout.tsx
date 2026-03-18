@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/context/cart-context'
@@ -16,6 +16,7 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   weight: ['400', '500', '600', '700', '800', '900']
 })
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   description: 'Découvrez nos pyjamas luxueux et confortables de haute qualité. Livraison gratuite au Maroc. Paiement à la livraison. Commandez maintenant pour un confort premium.',
   keywords: 'pyjamas, pyjama été, pyjama luxe, confort, sommeil, Maroc, livraison gratuite',
   generator: 'v0.app',
-   metadataBase: new URL('https://lilynova.com'),
+  metadataBase: new URL('https://lilynova.com'),
   icons: {
     icon: [
       {
@@ -48,25 +49,25 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-  type: 'website',
-  locale: 'fr_FR',
-  url: 'https://lilynova.com',
-  title: 'Pyjamas Premium Confortables',
-  description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
-  images: [
-    {
-      url: '/hero-bg-desktop.jpg',
-      width: 1200,
-      height: 630,
-      alt: 'lilynova Pyjamas Premium - Desktop',
-    },
-    {
-      url: '/images/hero-bg-mobile.jpg',
-      width: 1080,
-      height: 1920,
-      alt: 'lilynova Pyjamas Premium - Mobile',
-    }
-  ],
+    type: 'website',
+    locale: 'fr_FR',
+    url: 'https://lilynova.com',
+    title: 'Pyjamas Premium Confortables',
+    description: 'Découvrez nos pyjamas luxueux et confortables avec livraison gratuite au Maroc.',
+    images: [
+      {
+        url: '/hero-bg-desktop.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'lilynova Pyjamas Premium - Desktop',
+      },
+      {
+        url: '/images/hero-bg-mobile.jpg',
+        width: 1080,
+        height: 1920,
+        alt: 'lilynova Pyjamas Premium - Mobile',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -99,8 +100,7 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <meta charSet="utf-8" />
-  <MetaPixel />  
+        <PixelWrapper />
       </head>
       <body className="font-sans antialiased">
         <CartProvider>
