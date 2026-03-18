@@ -13,46 +13,54 @@ declare global {
 export function MetaPixel() {
   const pathname = usePathname()
 
+  // Initialize pixel only once
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Official Facebook Pixel Code
-    ;(function(f: any, b: any, e: any, v: any, n: any, t: any, s: any) {
-      if (f.fbq) return
-      n = f.fbq = function() {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments)
-      }
-      if (!f._fbq) f._fbq = n
-      n.push = n
-      n.loaded = true
-      n.version = '2.0'
-      n.queue = []
-      t = b.createElement(e)
-      t.async = true
-      t.src = v
-      s = b.getElementsByTagName(e)[0]
-      s.parentNode.insertBefore(t, s)
-    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', 'fbq')
+    // Only load script once
+    if (!window.fbq) {
+      // Official Facebook Pixel Code
+      ;(function(f: any, b: any, e: any, v: any, n: any, t: any, s: any) {
+        if (f.fbq) return
+        n = f.fbq = function() {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments)
+        }
+        if (!f._fbq) f._fbq = n
+        n.push = n
+        n.loaded = true
+        n.version = '2.0'
+        n.queue = []
+        t = b.createElement(e)
+        t.async = true
+        t.src = v
+        s = b.getElementsByTagName(e)[0]
+        s.parentNode.insertBefore(t, s)
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', 'fbq')
 
-    // Initialize Pixel ID and track PageView
-    if (window.fbq) {
+      // Initialize Pixel ID
       window.fbq('init', '797473043399003')
-      window.fbq('track', 'PageView')
-    }
 
-    // Add noscript fallback
-    if (!document.getElementById('facebook-pixel-noscript')) {
-      const noscript = document.createElement('noscript')
-      noscript.id = 'facebook-pixel-noscript'
-      const img = document.createElement('img')
-      img.height = 1
-      img.width = 1
-      img.style.display = 'none'
-      img.src = 'https://www.facebook.com/tr?id=797473043399003&ev=PageView&noscript=1'
-      noscript.appendChild(img)
-      document.body.appendChild(noscript)
+      // Add noscript fallback
+      if (!document.getElementById('facebook-pixel-noscript')) {
+        const noscript = document.createElement('noscript')
+        noscript.id = 'facebook-pixel-noscript'
+        const img = document.createElement('img')
+        img.height = 1
+        img.width = 1
+        img.style.display = 'none'
+        img.src = 'https://www.facebook.com/tr?id=797473043399003&ev=PageView&noscript=1'
+        noscript.appendChild(img)
+        document.body.appendChild(noscript)
+      }
+    }
+  }, [])
+
+  // Track PageView on route changes
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView')
     }
   }, [pathname])
 
