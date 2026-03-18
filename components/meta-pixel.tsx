@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 declare global {
   interface Window {
     fbq?: any
+    _fbq?: any
   }
 }
 
@@ -15,30 +16,29 @@ export function MetaPixel() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Initialize fbq if not already done
-    if (!window.fbq) {
-      // Load the Facebook Pixel script
-      const script = document.createElement('script')
-      script.async = true
-      script.src = 'https://connect.facebook.net/en_US/fbevents.js'
-      document.head.appendChild(script)
-
-      // Initialize the pixel
-      ;(window as any).fbq = function(this: any) {
-        (window as any).fbq.callMethod
-          ? (window as any).fbq.callMethod.apply((window as any).fbq, arguments)
-          : (window as any).fbq.queue.push(arguments)
+    // Official Facebook Pixel Code
+    ;(function(f: any, b: any, e: any, v: any, n: any, t: any, s: any) {
+      if (f.fbq) return
+      n = f.fbq = function() {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments)
       }
-      ;(window as any).fbq.push = (window as any).fbq
-      ;(window as any).fbq.loaded = true
-      ;(window as any).fbq.version = '2.0'
-      ;(window as any).fbq.queue = []
-    }
+      if (!f._fbq) f._fbq = n
+      n.push = n
+      n.loaded = true
+      n.version = '2.0'
+      n.queue = []
+      t = b.createElement(e)
+      t.async = true
+      t.src = v
+      s = b.getElementsByTagName(e)[0]
+      s.parentNode.insertBefore(t, s)
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', 'fbq')
 
-    // Initialize the pixel with the ID
+    // Initialize Pixel ID and track PageView
     if (window.fbq) {
       window.fbq('init', '797473043399003')
-      // Track PageView for every route change
       window.fbq('track', 'PageView')
     }
 
