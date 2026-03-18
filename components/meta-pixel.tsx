@@ -12,8 +12,6 @@ export function MetaPixel() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    console.log('[v0] Meta Pixel: Initializing')
-
     // Create and inject the Meta Pixel script immediately
     const metaPixelCode = document.createElement('script')
     metaPixelCode.innerHTML = `
@@ -27,10 +25,8 @@ export function MetaPixel() {
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '797473043399003');
       fbq('track', 'PageView');
-      console.log('[v0] Meta Pixel: Script executed');
     `
     document.head.insertBefore(metaPixelCode, document.head.firstChild)
-    console.log('[v0] Meta Pixel: Script injected into head')
 
     // Add noscript fallback
     const noscript = document.createElement('noscript')
@@ -44,58 +40,6 @@ export function MetaPixel() {
   }, [])
 
   return null
-}
-
-export function trackPurchase(data: {
-  currency?: string
-  value: number
-  content_name?: string
-  content_ids?: string[]
-  num_items?: number
-}) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', 'Purchase', {
-      currency: data.currency || 'MAD',
-      value: data.value,
-      content_name: data.content_name,
-      content_ids: data.content_ids,
-      num_items: data.num_items,
-    })
-  }
-}
-
-export function trackAddToCart(data: {
-  currency?: string
-  value: number
-  content_name?: string
-  content_id?: string
-}) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', 'AddToCart', {
-      currency: data.currency || 'MAD',
-      value: data.value,
-      content_name: data.content_name,
-      content_id: data.content_id,
-    })
-  }
-}
-
-export function trackViewContent(data: {
-  currency?: string
-  value: number
-  content_name?: string
-  content_id?: string
-  content_type?: string
-}) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', 'ViewContent', {
-      currency: data.currency || 'MAD',
-      value: data.value,
-      content_name: data.content_name,
-      content_id: data.content_id,
-      content_type: data.content_type || 'product',
-    })
-  }
 }
 
 export function trackPurchase(data: {
