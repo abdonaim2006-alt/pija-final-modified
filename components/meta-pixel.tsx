@@ -13,36 +13,42 @@ declare global {
 export function MetaPixel() {
   const pathname = usePathname()
 
+  // Initialize pixel on first load
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Script 1: Load the Facebook SDK
-    const sdkScript = document.createElement('script')
-    sdkScript.innerHTML = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    `
-    sdkScript.async = true
-    document.head.appendChild(sdkScript)
+    // Setup fbq before loading the external script
+    if (!window.fbq) {
+      window.fbq = function(this: any) {
+        (window.fbq as any).callMethod
+          ? (window.fbq as any).callMethod.apply(window.fbq, arguments)
+          : (window.fbq as any).queue.push(arguments)
+      }
+      ;(window as any)._fbq = window.fbq
+      ;(window.fbq as any).push = window.fbq
+      ;(window.fbq as any).loaded = true
+      ;(window.fbq as any).version = '2.0'
+      ;(window.fbq as any).queue = []
+    }
 
-    // Script 2: Initialize pixel
-    setTimeout(() => {
-      if (typeof window !== 'undefined' && (window as any).fbq) {
+    // Load the Facebook Events Library script
+    const script = document.createElement('script')
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+    script.async = true
+    document.head.appendChild(script)
+
+    // Initialize pixel after script loads
+    script.onload = () => {
+      if ((window as any).fbq) {
         (window as any).fbq('init', '797473043399003')
         (window as any).fbq('track', 'PageView')
       }
-    }, 100)
+    }
 
     // Add noscript fallback
-    if (!document.getElementById('facebook-pixel-noscript')) {
+    if (!document.querySelector('noscript[data-pixel-id="797473043399003"]')) {
       const noscript = document.createElement('noscript')
-      noscript.id = 'facebook-pixel-noscript'
+      noscript.setAttribute('data-pixel-id', '797473043399003')
       const img = document.createElement('img')
       img.height = 1
       img.width = 1
