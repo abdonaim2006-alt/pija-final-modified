@@ -3,56 +3,64 @@
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
+declare global {
+  interface Window {
+    fbq?: any
+  }
+}
+
 export function MetaPixel() {
   const pathname = usePathname()
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Initialize fbq only once
-    if ((window as any).fbq && (window as any).fbq.loaded) return
+    // Declare fbq with types
+    const w = window as any
+    
+    // Only init once
+    if (w.fbq && w.fbq.loaded) return
 
-    // Create the fbq function stub
-    function fbq(...args: any[]) {
-      if (fbq.callMethod) {
-        fbq.callMethod.apply(fbq, args as any)
+    // Create stub before loading external script
+    const stub = function (...args: any[]) {
+      if (stub.callMethod) {
+        stub.callMethod.apply(stub, args)
       } else {
-        fbq.queue.push(args)
+        stub.queue.push(args)
       }
     }
 
-    fbq.queue = []
-    fbq.loaded = true
-    fbq.version = '2.0'
+    stub.queue = []
+    stub.loaded = true
+    stub.version = '2.0'
 
-    // Attach to window immediately
-    ;(window as any).fbq = fbq
+    // Set on window BEFORE calling
+    w.fbq = stub
 
-    // Now it's safe to call fbq
-    fbq('init', '797473043399003')
-    fbq('track', 'PageView')
+    // Now call init and track
+    w.fbq('init', '797473043399003')
+    w.fbq('track', 'PageView')
 
-    // Load the Facebook script
-    if (!document.querySelector('script[src*="connect.facebook.net"]')) {
-      const script = document.createElement('script')
-      script.async = true
-      script.defer = true
-      script.src = 'https://connect.facebook.net/en_US/fbevents.js'
-      document.head.appendChild(script)
-    }
+    // Load the script
+    const script = document.createElement('script')
+    script.async = true
+    script.defer = true
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+    script.nonce = ''
+    document.head.appendChild(script)
   }, [])
 
-  // Track page views on route changes
+  // Track page views
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('track', 'PageView')
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView')
     }
   }, [pathname])
 
   return null
 }
 
-// Track Purchase events
+// Track Purchase
 export function trackPurchase(data: {
   currency?: string
   value: number
@@ -60,8 +68,8 @@ export function trackPurchase(data: {
   content_ids?: string[]
   num_items?: number
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'Purchase', {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', 'Purchase', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -71,15 +79,15 @@ export function trackPurchase(data: {
   }
 }
 
-// Track Add to Cart events
+// Track Add to Cart
 export function trackAddToCart(data: {
   currency?: string
   value: number
   content_name?: string
   content_id?: string
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'AddToCart', {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', 'AddToCart', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -88,7 +96,7 @@ export function trackAddToCart(data: {
   }
 }
 
-// Track View Content events
+// Track View Content
 export function trackViewContent(data: {
   currency?: string
   value: number
@@ -96,8 +104,8 @@ export function trackViewContent(data: {
   content_id?: string
   content_type?: string
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'ViewContent', {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', 'ViewContent', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
