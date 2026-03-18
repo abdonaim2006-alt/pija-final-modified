@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CheckCircle, AlertCircle } from 'lucide-react'
+import { trackPurchase } from '@/components/meta-pixel'
 
 interface CartItem {
   name: string
@@ -70,7 +71,13 @@ export function PajamaOrderForm({ items, total }: PajamaOrderFormProps) {
       if (!response.ok) {
         throw new Error(data.error || 'Erreur lors de l\'envoi')
       }
-
+trackPurchase({
+  currency: 'MAD',
+  value: total,                                    // Montant total
+  content_name: items.map(item => item.name),    // Noms des produits
+  content_ids: items.map((_, idx) => idx.toString()),  // IDs
+  num_items: items.length,                         // Nombre d'articles
+})
       setSuccess(true)
       setFullName('')
       setPhone('')
