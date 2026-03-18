@@ -10,9 +10,11 @@ declare global {
 
 export function MetaPixel() {
   useEffect(() => {
-    // Add Meta Pixel script to head
-    const script = document.createElement('script')
-    script.innerHTML = `
+    if (typeof window === 'undefined') return
+
+    // Create and inject the Meta Pixel script immediately
+    const metaPixelCode = document.createElement('script')
+    metaPixelCode.innerHTML = `
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -24,9 +26,17 @@ export function MetaPixel() {
       fbq('init', '797473043399003');
       fbq('track', 'PageView');
     `
-    script.async = true
-    script.defer = true
-    document.head.appendChild(script)
+    document.head.insertBefore(metaPixelCode, document.head.firstChild)
+
+    // Add noscript fallback
+    const noscript = document.createElement('noscript')
+    const img = document.createElement('img')
+    img.height = 1
+    img.width = 1
+    img.style.display = 'none'
+    img.src = 'https://www.facebook.com/tr?id=797473043399003&ev=PageView&noscript=1'
+    noscript.appendChild(img)
+    document.body.appendChild(noscript)
   }, [])
 
   return null
