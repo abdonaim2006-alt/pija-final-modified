@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/context/cart-context'
 import { WhatsAppButton } from '@/components/whatsapp-button'
 import './globals.css'
+import { MetaPixel } from '@/components/meta-pixel'
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -96,6 +97,8 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
+        <meta charSet="utf-8" />
+  <MetaPixel />  
       </head>
       <body className="font-sans antialiased">
         <CartProvider>
