@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CheckCircle, AlertCircle } from 'lucide-react'
+import { trackPurchase } from '@/components/meta-pixel'
 
 interface CartItem {
   name: string
@@ -70,6 +71,15 @@ export function PajamaOrderForm({ items, total }: PajamaOrderFormProps) {
       if (!response.ok) {
         throw new Error(data.error || 'Erreur lors de l\'envoi')
       }
+
+      // Track purchase event on Meta Pixel
+      trackPurchase({
+        currency: 'MAD',
+        value: total,
+        content_name: items.map(item => item.name).join(', '),
+        content_ids: items.map((_, idx) => idx.toString()),
+        num_items: items.length,
+      })
 
       setSuccess(true)
       setFullName('')

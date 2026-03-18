@@ -12,12 +12,6 @@ const nextConfig = {
   compress: true,
   productionBrowserSourceMaps: false,
   experimental: {
-    turbopack: {
-      resolveAlias: {
-        'framer-motion': false,
-      },
-      cacheDir: '.turbo-cache-invalidated',
-    },
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
@@ -27,7 +21,6 @@ const nextConfig = {
   },
   cacheMaxMemorySize: 0,
   staticPageGenerationTimeout: 120,
-  swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
   generateEtags: true,

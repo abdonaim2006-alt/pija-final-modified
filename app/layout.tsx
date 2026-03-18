@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/context/cart-context'
 import { WhatsAppButton } from '@/components/whatsapp-button'
+import { MetaPixel } from '@/components/meta-pixel'
 import './globals.css'
 
 const inter = Inter({ 
@@ -16,17 +17,23 @@ const playfair = Playfair_Display({
   weight: ['400', '500', '600', '700', '800', '900']
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' }
+  ]
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://lilynova.com'),
   title: 'Pyjamas Premium Confortables | Livraison Gratuite Maroc',
   description: 'Découvrez nos pyjamas luxueux et confortables de haute qualité. Livraison gratuite au Maroc. Paiement à la livraison. Commandez maintenant pour un confort premium.',
   keywords: 'pyjamas, pyjama été, pyjama luxe, confort, sommeil, Maroc, livraison gratuite',
   generator: 'v0.app',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   icons: {
     icon: [
       {
@@ -96,6 +103,7 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
+        <MetaPixel />
       </head>
       <body className="font-sans antialiased">
         <CartProvider>
