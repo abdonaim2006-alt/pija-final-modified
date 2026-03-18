@@ -12,55 +12,43 @@ declare global {
 export function MetaPixel() {
   const pathname = usePathname()
 
-  // Load Meta Pixel script and initialize
   useEffect(() => {
     if (typeof window === 'undefined') return
+    if ((window as any).fbq?.loaded) return
 
-    // Avoid duplicate initialization
-    if ((window as any).fbq) return
-
-    // Create fbq stub before script loads
-    const fbq = function (...args: any[]) {
-      if (fbq.callMethod) {
-        fbq.callMethod.apply(fbq, args)
+    // Initialize fbq stub
+    window.fbq = function (...args: any[]) {
+      if (window.fbq.callMethod) {
+        window.fbq.callMethod.apply(window.fbq, args)
       } else {
-        fbq.queue.push(args)
+        window.fbq.queue.push(args)
       }
     }
-    fbq.queue = []
-    fbq.loaded = true
-    fbq.version = '2.0'
+    window.fbq.queue = []
+    window.fbq.loaded = true
+    window.fbq.version = '2.0'
 
-    // Assign to window
-    ;(window as any).fbq = fbq
+    // Call init and track
+    window.fbq('init', '797473043399003')
+    window.fbq('track', 'PageView')
 
-    // Initialize pixel with ID
-    ;(window as any).fbq('init', '797473043399003')
-    ;(window as any).fbq('track', 'PageView')
-
-    // Load Facebook's pixel script
+    // Load script
     const script = document.createElement('script')
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
     script.async = true
     script.defer = true
-    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
     document.head.appendChild(script)
-
-    return () => {
-      // Cleanup not needed for pixels
-    }
   }, [])
 
-  // Track page views when route changes
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      ;(window as any).fbq('track', 'PageView')
+    if (window?.fbq) {
+      window.fbq('track', 'PageView')
     }
   }, [pathname])
 
   return null
 }
 
-// Export tracking functions
 export function trackPurchase(data: {
   currency?: string
   value: number
@@ -68,8 +56,8 @@ export function trackPurchase(data: {
   content_ids?: string[]
   num_items?: number
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'Purchase', {
+  if (window?.fbq) {
+    window.fbq('track', 'Purchase', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -85,8 +73,8 @@ export function trackAddToCart(data: {
   content_name?: string
   content_id?: string
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'AddToCart', {
+  if (window?.fbq) {
+    window.fbq('track', 'AddToCart', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
@@ -102,8 +90,8 @@ export function trackViewContent(data: {
   content_id?: string
   content_type?: string
 }) {
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    ;(window as any).fbq('track', 'ViewContent', {
+  if (window?.fbq) {
+    window.fbq('track', 'ViewContent', {
       currency: data.currency || 'MAD',
       value: data.value,
       content_name: data.content_name,
