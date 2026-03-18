@@ -6,32 +6,34 @@ import { usePathname } from 'next/navigation'
 export function MetaPixel() {
   const pathname = usePathname()
 
-  // Inject Meta Pixel script and initialize
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Check if already loaded
+    // Only initialize once
     if ((window as any).fbq) return
 
-    // Create fbq function stub before loading script
-    const fbq = function (...args: any[]) {
+    // Create the fbq function stub BEFORE loading the script
+    const fbq = function (this: any, ...args: any[]) {
       if (fbq.callMethod) {
         fbq.callMethod.apply(fbq, args)
       } else {
         fbq.queue.push(args)
       }
     }
+
     fbq.push = fbq
     fbq.loaded = true
     fbq.version = '2.0'
     fbq.queue = []
+
+    // Attach to window
     ;(window as any).fbq = fbq
 
-    // Queue initialization and page view
-    fbq('init', '797473043399003')
-    fbq('track', 'PageView')
+    // Initialize with Meta Pixel ID
+    ;(window as any).fbq('init', '797473043399003')
+    ;(window as any).fbq('track', 'PageView')
 
-    // Load the actual script
+    // Now load the actual Facebook script
     const script = document.createElement('script')
     script.src = 'https://connect.facebook.net/en_US/fbevents.js'
     script.async = true
@@ -39,7 +41,7 @@ export function MetaPixel() {
     document.head.appendChild(script)
 
     return () => {
-      // Cleanup if needed
+      // Cleanup on unmount
     }
   }, [])
 
@@ -53,7 +55,7 @@ export function MetaPixel() {
   return null
 }
 
-// Utility function to track Purchase events
+// Track Purchase events
 export function trackPurchase(data: {
   currency?: string
   value: number
@@ -72,7 +74,7 @@ export function trackPurchase(data: {
   }
 }
 
-// Utility function to track AddToCart events
+// Track Add to Cart events
 export function trackAddToCart(data: {
   currency?: string
   value: number
@@ -89,7 +91,7 @@ export function trackAddToCart(data: {
   }
 }
 
-// Utility function to track ViewContent events
+// Track View Content events
 export function trackViewContent(data: {
   currency?: string
   value: number
