@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation'
 import { ChevronLeft, Star } from 'lucide-react'
 import { SingleProductOrderForm } from '@/components/single-product-order-form'
 import { products } from '@/lib/products'
+import { trackViewContent, trackAddToCart } from '@/components/meta-pixel'
 
 function ProductContent() {
   const params = useParams()
@@ -43,6 +44,15 @@ function ProductContent() {
         setProduct(found)
         setSelectedSize(found.sizes[0])
         setSelectedColor(found.colors[0])
+        
+        // Track ViewContent event for Meta Pixel
+        trackViewContent({
+          value: found.salePrice || found.price,
+          currency: 'MAD',
+          content_name: found.name,
+          content_id: found.id,
+          content_type: 'product',
+        })
       }
     }
   }, [productId])
@@ -74,6 +84,15 @@ function ProductContent() {
       color: selectedColor,
       image: `/images/product-${product.id}${colorImageMap[selectedColor] || ''}.jpg`,
     })
+    
+    // Track AddToCart event for Meta Pixel
+    trackAddToCart({
+      value: (product.salePrice || product.price) * quantity,
+      currency: 'MAD',
+      content_name: product.name,
+      content_id: product.id,
+    })
+    
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 3000)
   }
