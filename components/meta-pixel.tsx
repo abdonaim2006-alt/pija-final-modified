@@ -6,11 +6,40 @@ import { usePathname } from 'next/navigation'
 export function MetaPixel() {
   const pathname = usePathname()
 
+  // Inject Meta Pixel script and initialize
   useEffect(() => {
-    // Initialize Meta Pixel
-    if (typeof window !== 'undefined') {
-      ;(window as any).fbq('init', '797473043399003')
-      ;(window as any).fbq('track', 'PageView')
+    if (typeof window === 'undefined') return
+
+    // Check if already loaded
+    if ((window as any).fbq) return
+
+    // Create fbq function stub before loading script
+    const fbq = function (...args: any[]) {
+      if (fbq.callMethod) {
+        fbq.callMethod.apply(fbq, args)
+      } else {
+        fbq.queue.push(args)
+      }
+    }
+    fbq.push = fbq
+    fbq.loaded = true
+    fbq.version = '2.0'
+    fbq.queue = []
+    ;(window as any).fbq = fbq
+
+    // Queue initialization and page view
+    fbq('init', '797473043399003')
+    fbq('track', 'PageView')
+
+    // Load the actual script
+    const script = document.createElement('script')
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js'
+    script.async = true
+    script.defer = true
+    document.head.appendChild(script)
+
+    return () => {
+      // Cleanup if needed
     }
   }, [])
 
@@ -20,36 +49,6 @@ export function MetaPixel() {
       ;(window as any).fbq('track', 'PageView')
     }
   }, [pathname])
-
-  // Inject Meta Pixel script
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !(window as any).fbq) {
-      // Create fbq function stub
-      ;(window as any).fbq = function (...args: any[]) {
-        if ((window as any).fbq.callMethod) {
-          ;(window as any).fbq.callMethod.apply((window as any).fbq, args)
-        } else {
-          ;(window as any).fbq.queue.push(args)
-        }
-      }
-      ;(window as any).fbq.push = (window as any).fbq
-      ;(window as any).fbq.loaded = true
-      ;(window as any).fbq.version = '2.0'
-      ;(window as any).fbq.queue = []
-
-      // Create and inject script
-      const script = document.createElement('script')
-      script.src = 'https://connect.facebook.net/en_US/fbevents.js'
-      script.async = true
-      document.head.appendChild(script)
-
-      // Initialize after script loads
-      script.onload = () => {
-        ;(window as any).fbq('init', '797473043399003')
-        ;(window as any).fbq('track', 'PageView')
-      }
-    }
-  }, [])
 
   return null
 }
